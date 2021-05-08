@@ -2,19 +2,16 @@ package com.spring.security.config;
 
 import com.spring.security.filter.JWTAuthenticationFilter;
 import com.spring.security.filter.JwtTokenFilter;
+import com.spring.security.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -32,6 +29,8 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtTokenFilter jwtTokenFilter;
     private final UserDetailsService userDetailsService;
+    @Autowired
+    private JwtService jwtService;
     /*private final PasswordEncoder passwordEncoder;*/
 
     @Autowired
@@ -60,7 +59,9 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
-                .addFilterAt(new JWTAuthenticationFilter(authenticationManager()), UsernamePasswordAuthenticationFilter.class)
+                .addFilterAt(new JWTAuthenticationFilter(authenticationManager(),
+                                jwtService,userDetailsService)
+                        , UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(
                         jwtTokenFilter,
                         JWTAuthenticationFilter.class);
