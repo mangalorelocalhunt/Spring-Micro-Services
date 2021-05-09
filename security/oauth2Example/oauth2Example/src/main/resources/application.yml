@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: auth2example
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#            google:
+#              client-id: 1024563174309-qmdmlfbtg5j4mbq01shl302dr3ugij2a.apps.googleusercontent.com
+#              client-secret: j-BErF_z9-fNf-2Ttz0ucPX5
+#              redirect-uri: http://localhost:8080/login/oauth2/code/google
