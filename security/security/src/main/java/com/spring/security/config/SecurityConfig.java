@@ -25,19 +25,19 @@ import javax.servlet.http.HttpServletResponse;
         jsr250Enabled = true,
         prePostEnabled = true
 )
-public class securityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtTokenFilter jwtTokenFilter;
     private final UserDetailsService userDetailsService;
-    @Autowired
-    private JwtService jwtService;
+    private final JwtService jwtService;
     /*private final PasswordEncoder passwordEncoder;*/
 
     @Autowired
-    public securityConfig(JwtTokenFilter jwtTokenFilter, UserDetailsService userDetailsService/*, PasswordEncoder passwordEncoder*/) {
+    public SecurityConfig(JwtTokenFilter jwtTokenFilter, UserDetailsService userDetailsService,/*, PasswordEncoder passwordEncoder*/JwtService jwtService) {
         this.jwtTokenFilter = jwtTokenFilter;
         this.userDetailsService = userDetailsService;
       /*  this.passwordEncoder = passwordEncoder;*/
+        this.jwtService = jwtService;
     }
 
     @Override
@@ -48,12 +48,11 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(
-                        (request, response, ex) -> {
+                        (request, response, ex) ->
                             response.sendError(
                                     HttpServletResponse.SC_UNAUTHORIZED,
                                     ex.getMessage()
-                            );
-                        }
+                            )
                 )
                 .and()
                 .authorizeRequests()
@@ -69,9 +68,9 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public CorsFilter corsFilter() {
-        UrlBasedCorsConfigurationSource source =
+        var source =
                 new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
+        var config = new CorsConfiguration();
         config.setAllowCredentials(true);
         config.addAllowedOriginPattern("**");
         config.addAllowedHeader("*");

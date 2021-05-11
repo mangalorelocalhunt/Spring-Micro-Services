@@ -1,6 +1,16 @@
 # Spring-Micro-Services
 Exploring Spring boot features
 
+
+---------------------------------- JWT TOKEN ------------------------------------------------------
+use /login with username and password parameters 
+response will return jwt berear token in header by adding it to authorization key
+whenever invoking invoke with same token
+
+
+
+---------------------------------- OAUTH2 CLIENT ------------------------------------------------------
+
 To Invoke login with google manual user need to enter below link in address bar
 http://localhost:8080/oauth2/authorization/google
 
