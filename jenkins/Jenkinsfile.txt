@@ -8,6 +8,9 @@ pipeline {
 
 	
     stages {
+		stage('checkout'){
+			git branch: 'feature/jenkins', credentialsId: '7ecdf29e-833d-4b47-a08a-6ddfdb98895a', url: 'https://github.com/sumanmj/Spring-Micro-Services.git'
+		}
         stage('clean') {
             steps {
                 bat "${mvnCMD} -f ../security/security/pom.xml clean";
