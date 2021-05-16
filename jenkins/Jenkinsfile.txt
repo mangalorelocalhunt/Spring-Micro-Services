@@ -1,14 +1,12 @@
 pipeline {
     agent any
     stages {
-        stage('Example') {
+        stage('clean') {
             steps {
-                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}";
-				echo "${env.JAVA_HOME} and  ${env.MAVEN_HOME}"
+                sh "mvn clean compile package"
             }
         }
     }
 }
-
 
 
