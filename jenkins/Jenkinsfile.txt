@@ -4,7 +4,7 @@ pipeline {
         stage('Example') {
             steps {
                 echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}";
-				echo "${JAVA_HOME} and  ${MAVEN_HOME}"
+				echo "${env.JAVA_HOME} and  ${env.MAVEN_HOME}"
             }
         }
     }
