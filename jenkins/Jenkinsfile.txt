@@ -15,7 +15,7 @@ pipeline {
 		}
         stage('clean') {
             steps {
-                bat "${mvnCMD} -f ../security/security/pom.xml clean clean";
+                bat "${mvnCMD} -f security/security/pom.xml clean clean";
             }
         }
 		stage('test') {
