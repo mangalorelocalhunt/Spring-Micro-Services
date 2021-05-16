@@ -4,8 +4,8 @@ pipeline {
         stage('clean') {
             steps {
 				def mvnHome = tool name: 'maven', type: 'maven'
-				def mvnCMD = "${mvnHome}/bin/mvn
-                bat ""${mvnCMD} -f ../security/security/pom.xml clean";
+				def mvnCMD = "${mvnHome}/bin/mvn"
+                bat "${mvnCMD} -f ../security/security/pom.xml clean";
             }
         }
 		stage('test') {
