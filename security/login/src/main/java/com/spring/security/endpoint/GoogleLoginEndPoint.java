@@ -5,22 +5,17 @@ import com.spring.security.service.GoogleOAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
 
 @RestController
-public class HelloWorldEndPoint {
+@RequestMapping("/google")
+public class GoogleLoginEndPoint {
 
     @Autowired
     GoogleOAuthService googleOAuthService;
 
-    @GetMapping("api/user")
-    public String helloUser() {
-        return "Hello User";
+    @PostMapping("verify")
+    public void googleAccessCodeVerify(@RequestBody Sampled sampled) {
+        googleOAuthService.verify(sampled.getVal());
     }
 
-    @GetMapping("api/admin")
-    public String helloAdmin() {
-        return "Hello Admin";
-    }
 }

@@ -1,6 +1,6 @@
 package com.spring.security.config;
 
-import com.spring.security.filter.JWTAuthenticationFilter;
+import com.spring.security.filter.JwtAuthenticationFilter;
 import com.spring.security.filter.JwtTokenFilter;
 import com.spring.security.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -27,45 +26,37 @@ import javax.servlet.http.HttpServletResponse;
 )
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final JwtTokenFilter jwtTokenFilter;
     private final UserDetailsService userDetailsService;
     private final JwtService jwtService;
-    /*private final PasswordEncoder passwordEncoder;*/
 
     @Autowired
-    public SecurityConfig(JwtTokenFilter jwtTokenFilter, UserDetailsService userDetailsService,/*, PasswordEncoder passwordEncoder*/JwtService jwtService) {
-        this.jwtTokenFilter = jwtTokenFilter;
+    public SecurityConfig(UserDetailsService userDetailsService,
+                          JwtService jwtService) {
         this.userDetailsService = userDetailsService;
-      /*  this.passwordEncoder = passwordEncoder;*/
         this.jwtService = jwtService;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
-                /*.sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()*/
                 .oauth2Login()
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(
                         (request, response, ex) ->
-                            response.sendError(
-                                    HttpServletResponse.SC_UNAUTHORIZED,
-                                    ex.getMessage()
-                            )
+                                response.sendError(
+                                        HttpServletResponse.SC_UNAUTHORIZED,
+                                        ex.getMessage()
+                                )
                 )
                 .and()
                 .authorizeRequests()
-                .anyRequest().authenticated()
+                .antMatchers("**/api/").authenticated()
+                .anyRequest().permitAll()
                 .and()
-                .addFilterAt(new JWTAuthenticationFilter(authenticationManager(),
-                                jwtService,userDetailsService)
-                        , UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(
-                        jwtTokenFilter,
-                        JWTAuthenticationFilter.class);
+                .addFilterAt(new JwtAuthenticationFilter(authenticationManager(),
+                                jwtService, userDetailsService)
+                        , UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
@@ -86,24 +77,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
     }
-
-   /* @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setPasswordEncoder(passwordEncoder);
-        provider.setUserDetailsService(userDetailsService);
-        return provider;
-    }
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(daoAuthenticationProvider());
-    }*/
 
 
 }

@@ -9,8 +9,13 @@ spring:
         client:
            registration:
                google:
-                 client-id: 1024563174309-qmdmlfbtg5j4mbq01shl302dr3ugij2a.apps.googleusercontent.com
-                 client-secret: j-BErF_z9-fNf-2Ttz0ucPX5
+                 client-id: 733478155573-g9ogkbgu2hf30uiengk7spgrf7ufv31v.apps.googleusercontent.com
+                 #client-id: 733478155573-8ifcsu6uu38i2nu8oloreqgpeng8h8a4.apps.googleusercontent.com
+                 client-secret: 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
                  redirect-uri: http://localhost:8080/login/oauth2/code/google
+
+
+
+
 
 
