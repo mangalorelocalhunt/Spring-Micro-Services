@@ -1,7 +1,6 @@
 package com.spring.security.config;
 
 import com.spring.security.filter.JwtAuthenticationFilter;
-import com.spring.security.filter.JwtTokenFilter;
 import com.spring.security.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

@@ -2,15 +2,12 @@ package com.spring.security.service.impl;
 
 
 import com.spring.security.model.GoogleAccessToken;
-import com.spring.security.model.MyMateUser;
 import com.spring.security.service.GoogleOAuthService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -29,10 +26,10 @@ public class GoogleOAuthServiceImpl implements GoogleOAuthService {
     }
 
     @Override
-    public void verify(String idTokenString){
+    public void verify(String accessToken){
         Map<String, String> keyMap = new HashMap<>();
-        keyMap.put("access_token",idTokenString);
-        client.get().uri("https://oauth2.googleapis.com/tokeninfo?access_token="+idTokenString)
+        keyMap.put("access_token",accessToken);
+        client.get().uri("https://oauth2.googleapis.com/tokeninfo?access_token="+accessToken)
         .retrieve().bodyToMono(GoogleAccessToken.class)
                 .subscribe(this::isValidGoogleAccessToken);
     }

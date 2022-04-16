@@ -16,8 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ *
+ */
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-
 
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;

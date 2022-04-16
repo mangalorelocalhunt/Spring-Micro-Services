@@ -5,14 +5,14 @@ import org.springframework.security.core.userdetails.User;
 
 import java.util.Collection;
 
-public class MyMateUser extends User {
+public class LocalUser extends User {
 
 
-    public MyMateUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public LocalUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
     }
 
-    public MyMateUser(String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
+    public LocalUser(String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
     }
 }

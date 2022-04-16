@@ -26,11 +26,27 @@ public class JwtService {
         this.userDetailsService = userDetailsService;
     }
 
+    /**
+     *
+     * @param userDetails
+     * Generate JWT Token Using UserDetails
+     * @return Jwt Token
+     */
     public String generate(UserDetails userDetails) {
+        return this.generate(userDetails.getUsername());
+    }
+
+    /**
+     *
+     * @param userName
+     * Generate JWT Token Using userName
+     * @return Jwt Token
+     */
+    public String generate(String userName) {
         return BEARER + Jwts.builder()
                 .setId(UUID.randomUUID().toString())
-                .setSubject(userDetails.getUsername() + JWT_SUBJECT)
-                .claim(USERNAME_CLAIM, userDetails.getUsername())
+                .setSubject(userName + JWT_SUBJECT)
+                .claim(USERNAME_CLAIM, userName)
                 .setIssuedAt(Date.from(LocalDate.now().atStartOfDay(ZoneId.of(ZoneId.SHORT_IDS.get("IST"))).toInstant()))
                 .setExpiration(Date.from(LocalDate.now().atStartOfDay(ZoneId.of(ZoneId.SHORT_IDS.get("IST"))).plusDays(1)
                         .toInstant()))
@@ -57,13 +73,13 @@ public class JwtService {
     }
 
     private Map getJwtBody(String token) {
-        token = removeBerear(token);
+        token = removeBearer(token);
         Jwt jwt = Jwts.parserBuilder().setSigningKey(JWT_SECRET_KEY.getBytes(StandardCharsets.UTF_8)).build().parse(token);
         return (Map<String, Object>) jwt.getBody();
     }
 
 
-    private String removeBerear(String token) {
+    private String removeBearer(String token) {
         return token.replace(BEARER, "");
     }
 }
