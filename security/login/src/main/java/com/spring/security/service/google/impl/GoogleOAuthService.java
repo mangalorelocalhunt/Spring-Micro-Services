@@ -1,4 +1,4 @@
-package com.spring.security.service;
+package com.spring.security.service.google.impl;
 
 public interface GoogleOAuthService {
 

@@ -1,6 +1,6 @@
 package com.spring.security.filter;
 
-import com.spring.security.service.JwtService;
+import com.spring.security.service.security.JwtService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;

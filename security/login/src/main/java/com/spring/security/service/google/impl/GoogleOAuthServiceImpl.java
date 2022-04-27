@@ -1,8 +1,7 @@
-package com.spring.security.service.impl;
+package com.spring.security.service.google.impl;
 
 
 import com.spring.security.model.GoogleAccessToken;
-import com.spring.security.service.GoogleOAuthService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;

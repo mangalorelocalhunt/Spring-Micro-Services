@@ -1,7 +1,7 @@
 package com.spring.security.endpoint;
 
 import com.spring.security.model.Sampled;
-import com.spring.security.service.GoogleOAuthService;
+import com.spring.security.service.google.impl.GoogleOAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

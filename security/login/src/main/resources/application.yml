@@ -13,6 +13,17 @@ spring:
                  #client-id: 733478155573-8ifcsu6uu38i2nu8oloreqgpeng8h8a4.apps.googleusercontent.com
                  client-secret: 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
                  redirect-uri: http://localhost:8080/login/oauth2/code/google
+  data:
+    mongodb:
+      uri: mongodb+srv://mangoadmin:J1XH23I5PJWpRI3r@cluster0.nuntc.mongodb.net/mymate?retryWrites=true&w=majority
+      #uri: mongodb+srv://admin:1%40Towncity@mymatecluster0.r1s6p.mongodb.net/mymate?retryWrites=true&w=majority
+      database: mymate
+      auto-index-creation: true
+      #username: sumanmj667@gmail.com
+      #password: 1@Towncity
+      #authentication-database: admin
+      #port: 27017
+      #host:  mongodb+srv:mymatecluster0.mongodb.net
 
 
 

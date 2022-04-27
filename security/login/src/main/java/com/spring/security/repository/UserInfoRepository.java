@@ -1,6 +1,6 @@
 package com.spring.security.repository;
 
-import com.spring.security.document.UserInfo;
+import com.spring.security.model.document.UserInfo;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

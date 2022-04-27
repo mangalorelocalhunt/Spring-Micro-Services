@@ -1,9 +1,10 @@
 package com.spring.security.service.user;
 
-import com.spring.security.model.LocalUser;
+
+import com.spring.security.model.user.ApplicationUser;
 
 public interface LocalUserService {
 
-    public LocalUser registerUser(String username,String email);
+    public void registerUser(ApplicationUser user);
 
 }

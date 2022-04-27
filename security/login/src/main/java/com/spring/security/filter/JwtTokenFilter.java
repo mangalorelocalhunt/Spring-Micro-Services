@@ -1,6 +1,6 @@
 package com.spring.security.filter;
 
-import com.spring.security.service.JwtService;
+import com.spring.security.service.security.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
